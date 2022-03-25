@@ -99,7 +99,47 @@ struct Menu : Widget {
         own = &win;
     }
 };
+    
+    class Lines_window : public Window
+	{
+	public:
+		Lines_window(Point xy, int w, int h, const string& title);
+		Open_polyline m_lines;
 
+		Menu m_colourMenu;
+		Button m_menuButton;
+
+		Menu m_lsMenu;
+		Button m_lsButton;
+
+		void change(Color c) { m_lines.set_color(c); hideMenu(); redraw(); }
+		void hideMenu() { m_colourMenu.hide(); m_menuButton.show(); }
+		void hideLSmenu() { m_lsMenu.hide(); m_lsButton.show(); }
+
+		void redPressed() { change(Color::red); }
+		void bluePressed() { change(Color::blue); }
+		void blackPressed() { change(Color::black); }
+		void menuPressed() { m_menuButton.hide(); m_colourMenu.show(); }
+		void lsMenuPressed() { m_lsButton.hide(); m_lsMenu.show(); }
+		void changeStyle(Line_style ls) { m_lines.set_style(ls); hideLSmenu(); redraw(); }
+
+		//callback functions
+		static void cb_red(Address, Address addr) { reference_to<Lines_window>(addr).redPressed(); }
+		static void cb_blue(Address, Address addr) { reference_to<Lines_window>(addr).bluePressed(); }
+		static void cb_black(Address, Address addr) { reference_to<Lines_window>(addr).blackPressed(); }
+		static void cb_menu(Address, Address addr) { reference_to<Lines_window>(addr).menuPressed(); }
+		static void cb_lsMenu(Address, Address addr) { reference_to<Lines_window>(addr).lsMenuPressed(); }
+
+	private:
+		void next();
+		void quit();
+
+		Button m_nextButton;	//add (nextX, nextY) to lines
+		Button m_quitButton;
+		In_box m_nextX;
+		In_box m_nextY;
+		Out_box m_xyOut;
+	};
 }
 
 #endif
