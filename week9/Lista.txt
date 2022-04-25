@@ -1,0 +1,10 @@
+{ ketchup, 23.2, 1 }
+{ kávé, 999.99, 10 }
+{ chilis bab, 61.3, 2 }
+{ sör, 10.10, 3 }
+{ sültkrumpli, 12.543, 8 }
+{ gyros, 35.65, 4 }
+{ nutella, 72, 5 }
+{ alma, 59.5, 6 }
+{ pizza, 34, 7 }
+{ hamburger, 12, 9 }
